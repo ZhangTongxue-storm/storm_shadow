@@ -1,0 +1,34 @@
+import java.nio.file.Files
+
+pluginManagement {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+
+    }
+}
+rootProject.name = "storm_shadow"
+
+
+include ':host-app'
+include ':storm-common'
+include ':storm-manager'
+include ':storm-runtime'
+include ':storm-loader'
+include ':sample-host-lib'
+
+include ':plugin-one'
+include ':plugin-two'
+include ':storm-host-lib'
+include ':storm-plugin-view'

@@ -1,0 +1,52 @@
+//apply plugin: 'com.tencent.shadow.plugin'
+
+shadow {
+    transform {
+//        useHostContext = ['abc']
+    }
+
+    packagePlugin {
+        pluginTypes {
+            debug {
+                // loader 的地址
+                loaderApkConfig = new Tuple2('storm-loader-debug.apk', ':storm-loader:assembleDebug')
+                runtimeApkConfig = new Tuple2('storm-runtime-debug.apk', ':storm-runtime:assembleDebug')
+                pluginApks {
+                    pluginApk1 {
+                        businessName =project.ext["businessName"]
+                        partKey = project.ext['partKey']
+                        buildTask =project.ext['buildTaskDebug']
+                        apkPath = project.ext['apkPathDebug']
+                        hostWhiteList = ["com.storm.zhang.common","com.tencent.shadow.sample.host.lib"]
+                        uuid=project.ext["uuid"]
+                    }
+                }
+            }
+            release {
+                loaderApkConfig = new Tuple2('storm-loader-release.apk', ':storm-loader:assembleRelease')
+                runtimeApkConfig = new Tuple2('storm-runtime-release.apk', ':strom-runtime:assembleRelease')
+                pluginApks {
+                    pluginApk1 {
+                        businessName =project.ext["businessName"]
+                        partKey = project.ext['partKey']
+                        buildTask =project.ext['buildTaskRelease']
+                        apkPath = project.ext['apkPathRelease']
+                        hostWhiteList = ["com.storm.zhang.common"]
+                        uuid=project.ext["uuid"]
+                    }
+
+                }
+            }
+        }
+        loaderApkProjectPath = 'storm-loader'
+        runtimeApkProjectPath = 'storm-runtime'
+
+        archiveSuffix = project.ext["archiveSuffix"]?: ""
+        archivePrefix = project.ext["archivePrefix"]
+        destinationDir = "${getRootProject().getBuildDir()}"
+
+        version = project.ext["version"]
+        compactVersion = [1, 2, 3]
+        uuidNickName = project.ext["uuidNickName"]
+    }
+}
